@@ -1,0 +1,8 @@
+#include "Includes/Types.vert"
+
+Ray GetRayToPointLight(Point_Light pl, vec3 Position)
+{
+    Ray r = { Position, (pl.Position - Position) / length(pl.Position - Position) };
+
+    return r;
+}

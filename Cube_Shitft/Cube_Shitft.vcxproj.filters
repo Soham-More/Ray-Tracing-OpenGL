@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Call.cpp" />
+    <ClCompile Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Functions.cpp" />
+    <ClCompile Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Camera\Camera.cpp" />
+    <ClCompile Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\CubeMap\CubeMap.cpp" />
+    <ClCompile Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Cuboid\Cuboid.cpp" />
+    <ClCompile Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Model\Model.cpp" />
+    <ClCompile Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Shaders\Shader.cpp" />
+    <ClCompile Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Sphere\Sphere.cpp" />
+    <ClCompile Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Square\Square.cpp" />
+    <ClCompile Include="OGL\Shaders\SSBO\SSBO.cpp" />
+    <ClCompile Include="RT\RayTracer\RayTracer.cpp" />
+    <ClCompile Include="RT\Box\Box.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Call.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Functions.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\iOGL.hpp" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\OGL.hpp" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Wrapper_OGL.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Camera\Camera.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\CubeMap\CubeMap.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Cuboid\Cuboid.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Model\Model.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Shaders\Shader.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Sphere\Sphere.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Square\Square.h" />
+    <ClInclude Include="OGL\Shaders\SSBO\SSBO.h" />
+    <ClInclude Include="RT\RayTracer\RayTracer.h" />
+    <ClInclude Include="RT\Box\Box.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\RT\RT.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\Shaders\Compute_Shaders\Compute.sh" />
+    <None Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\Shaders\Compute_Shaders\Shader.sh" />
+    <None Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\Shaders\Compute_Shaders\Includes\Types.vert" />
+    <None Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\ParsedFile.pf" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,455 @@
+#version 430
+
+#define ERROR_CORRECTION 0.001f
+#define FAR_POINT 1000.0f
+
+struct Ray
+{
+    vec3 Origin;
+    vec3 Direction;
+};
+
+struct HitInfo
+{
+    vec2 lambda;
+    int boxID;
+    vec3 ImpactNormal;
+};
+
+struct IntersectInfo
+{
+    vec4 Color;
+    vec3 CorrectedPos;
+    vec3 Normal;
+    int id;
+    float t;
+    bool hasIntersected;
+};
+
+struct Box
+{
+    vec3 min;
+    vec3 max;
+    vec4 Color;
+};
+
+vec2 Get_Intersection(Box b, Ray r)
+{
+    vec3 tMin = (b.min - r.Origin) / r.Direction;
+    vec3 tMax = (b.max - r.Origin) / r.Direction;
+    vec3 t1 = min(tMin, tMax);
+    vec3 t2 = max(tMin, tMax);
+    float tNear = max(max(t1.x, t1.y), t1.z);
+    float tFar = min(min(t2.x, t2.y), t2.z);
+
+    return vec2(tNear, tFar);
+}
+
+float Int(float x)
+{
+    const float Inaccuracy = 1.0f - ERROR_CORRECTION;
+
+    if(x > Inaccuracy)
+    {
+        return 1.0f;
+    }
+    else if(x < -Inaccuracy)
+    {
+        return -1.0f;
+    }
+    else
+    {
+        return 0.0f;
+    }
+}
+
+vec3 Get_Impact_Normal_Box(vec3 impact, Box box)
+{
+    vec3 Center = (box.max + box.min)/2.0f;
+    vec3 divisor = (box.max - box.min)/2.0f;
+
+    vec3 R_pos = impact - Center;
+
+    vec3 pNormal = vec3(Int(R_pos.x/divisor.x), Int(R_pos.y/divisor.y), Int(R_pos.z/divisor.z));
+
+    return normalize(pNormal);
+}
+
+struct PointLight
+{
+    vec3 Pos;
+    vec4 Color;
+    float Intensity;
+};
+
+struct DirectionLight
+{
+    vec3 Pos;
+    vec3 Direction;
+    vec4 Color;
+};
+
+layout(local_size_x = 1, local_size_y = 1) in;
+layout(rgba32f, binding = 0) uniform image2D img_output;
+layout(std430, binding = 1) buffer SSBO_Buffer
+{
+    Box boxes[];
+};
+
+uniform int Scene_Length;
+uniform vec4 CameraPos;
+uniform mat4 ViewTransform;
+
+
+PointLight pl = PointLight(vec3(0, 5, 0), vec4(1.0f, 1.0f, 1.0f, 1.0f), 20.0f);
+
+bool IntersectBoxes(Ray r, out HitInfo HInfo)
+{
+    float smallest = FAR_POINT;
+    bool found = false;
+    for (int i = 0; i < boxes.length(); i++)
+    {
+        vec2 info = Get_Intersection(boxes[i], r);
+        if (info.x > 0.0f && info.x < info.y && info.x < smallest)
+        {
+            vec3 Pos = r.Origin + (info.x * r.Direction);
+
+            HInfo.lambda = info;
+            HInfo.boxID = i;
+            smallest = info.x;
+            HInfo.ImpactNormal = Get_Impact_Normal_Box(Pos, boxes[i]);
+
+            found = true;
+        }
+    }
+    return found;
+}
+
+bool IntersectBoxes(Ray r, out HitInfo HInfo, int Exclude)
+{
+    float smallest = FAR_POINT;
+    bool found = false;
+    for (int i = 0; i < boxes.length(); i++)
+    {
+        if(i == Exclude) continue;
+
+        vec2 info = Get_Intersection(boxes[i], r);
+        if (info.x > 0.0f && info.x < info.y && info.x < smallest)
+        {
+            vec3 Pos = r.Origin + (info.x * r.Direction);
+
+            HInfo.lambda = info;
+            HInfo.boxID = i;
+            smallest = info.x;
+            HInfo.ImpactNormal = Get_Impact_Normal_Box(Pos, boxes[i]);
+            found = true;
+        }
+    }
+    return found;
+}
+
+bool IntersectBoxes(Ray r, out HitInfo HInfo, int Exclude[2])
+{
+    float smallest = FAR_POINT;
+    bool found = false;
+    for (int i = 0; i < boxes.length(); i++)
+    {
+        if(i == Exclude[0]) continue;
+        if(i == Exclude[1]) continue;
+
+        vec2 info = Get_Intersection(boxes[i], r);
+        if (info.x > 0.0f && info.x < info.y && info.x < smallest)
+        {
+            vec3 Pos = r.Origin + (info.x * r.Direction);
+
+            HInfo.lambda = info;
+            HInfo.boxID = i;
+            smallest = info.x;
+            HInfo.ImpactNormal = Get_Impact_Normal_Box(Pos, boxes[i]);
+            found = true;
+        }
+    }
+    return found;
+}
+
+void trace(Ray r, int ex, out IntersectInfo Info)
+{
+    HitInfo i;
+
+    if (IntersectBoxes(r, i, ex))
+    {
+        Info.CorrectedPos = r.Origin + (i.lambda.x * r.Direction) - (i.ImpactNormal * ERROR_CORRECTION);
+        Info.Normal = i.ImpactNormal;
+
+        Info.Color = boxes[i.boxID].Color;
+        Info.id = i.boxID;
+        Info.t = i.lambda.x;
+        Info.hasIntersected = true;
+    }
+}
+
+void trace(Ray r, int ex[2], out IntersectInfo Info)
+{
+    HitInfo i;
+
+    if (IntersectBoxes(r, i, ex))
+    {
+        Info.CorrectedPos = r.Origin + (i.lambda.x * r.Direction) - (i.ImpactNormal * ERROR_CORRECTION);
+        Info.Normal = i.ImpactNormal;
+
+        Info.Color = boxes[i.boxID].Color;
+        Info.id = i.boxID;
+        Info.t = i.lambda.x;
+        Info.hasIntersected = true;
+    }
+}
+
+void trace(Ray r, out IntersectInfo Info)
+{
+    HitInfo i;
+
+    if (IntersectBoxes(r, i))
+    {
+        Info.CorrectedPos = r.Origin + (i.lambda.x * r.Direction) - (i.ImpactNormal * ERROR_CORRECTION);
+        Info.Normal = i.ImpactNormal;
+
+        Info.Color = boxes[i.boxID].Color;
+        Info.id = i.boxID;
+        Info.t = i.lambda.x;
+        Info.hasIntersected = true;
+    }
+}
+
+Ray GetRayToPointLight(PointLight pl, vec3 Position)
+{
+    return Ray(Position, normalize(pl.Pos - Position));
+}
+
+#extension GL_EXT_gpu_shader4: enable
+
+vec3 noise_Seed;
+
+int LFSR_Rand_Gen(in int n)
+{
+  // <<, ^ and & require GL_EXT_gpu_shader4.
+  n = (n << 13) ^ n;
+  return (n * (n*n*15731+789221) + 1376312589) & 0x7fffffff;
+}
+
+float LFSR_Rand_Gen_f( in int n )
+{
+  return float(LFSR_Rand_Gen(n));
+}
+
+float noise3f(vec3 P)
+{
+  vec3 p = noise_Seed + ( dot(noise_Seed, P) * P);
+  noise_Seed += LFSR_Rand_Gen_f(int(noise_Seed.x)) * p;
+
+  ivec3 ip = ivec3(floor(p));
+  vec3 u = fract(p);
+  u = u*u*(3.0-2.0*u);
+
+  int n = ip.x + ip.y*57 + ip.z*113;
+
+  float res = mix(mix(mix(LFSR_Rand_Gen_f(n+(0+57*0+113*0)),
+                          LFSR_Rand_Gen_f(n+(1+57*0+113*0)),u.x),
+                      mix(LFSR_Rand_Gen_f(n+(0+57*1+113*0)),
+                          LFSR_Rand_Gen_f(n+(1+57*1+113*0)),u.x),u.y),
+                 mix(mix(LFSR_Rand_Gen_f(n+(0+57*0+113*1)),
+                          LFSR_Rand_Gen_f(n+(1+57*0+113*1)),u.x),
+                      mix(LFSR_Rand_Gen_f(n+(0+57*1+113*1)),
+                          LFSR_Rand_Gen_f(n+(1+57*1+113*1)),u.x),u.y),u.z);
+
+  return 1.0 - res*(1.0/1073741824.0);
+}
+
+vec4 Get_Light_Ray_Color(IntersectInfo prevInfo, PointLight pl, vec3 Camera)
+{
+    Ray r = GetRayToPointLight(pl, prevInfo.CorrectedPos);
+
+    IntersectInfo Light_Ray_Info = { vec4(0.0f), vec3(0.0f), vec3(0.0f), 0, 0.0f, false };
+
+    trace(r, 3, Light_Ray_Info);
+
+    float t = length(pl.Pos - prevInfo.CorrectedPos);
+
+    if(!Light_Ray_Info.hasIntersected || ((Light_Ray_Info.t > t) && (Light_Ray_Info.t > 0.0f)))
+    {
+        if(prevInfo.id == 3)
+        {
+            return prevInfo.Color;
+        }
+
+        vec3 Normal = prevInfo.Normal;
+
+        vec4 ambient = 0.1f * pl.Color;
+
+        float Diff = max(dot(Normal, r.Direction), 0.0f);
+        vec4 Diffuse = Diff * pl.Color;
+
+        float specularStrength = 0.5;
+
+        vec3 viewDir = normalize(Camera - prevInfo.CorrectedPos.xyz);
+        vec3 reflectDir = reflect(-r.Direction, Normal);
+
+        float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+        vec4 Specular = specularStrength * spec * pl.Color;
+
+        vec4 FinalColor = (Specular + Diffuse + ambient) * prevInfo.Color;
+
+        return vec4(pl.Intensity * (FinalColor.xyz / (t * t)), 1.0f);
+    }
+
+    return vec4(0.05f);
+}
+
+vec4 Get_Color_For_Ray(IntersectInfo prevInfo, Ray r, PointLight pl, vec3 Camera)
+{
+    IntersectInfo Light_Ray_Info = { vec4(0.0f), vec3(0.0f), vec3(0.0f), 0, 0.0f, false };
+
+    int Array[2] = {3, 4};
+
+    trace(r, Array, Light_Ray_Info);
+
+    float t = length(pl.Pos - prevInfo.CorrectedPos);
+
+    if(!Light_Ray_Info.hasIntersected || ((Light_Ray_Info.t > t) && (Light_Ray_Info.t > 0.0f)))
+    {
+        if(prevInfo.id == 3)
+        {
+            return prevInfo.Color;
+        }
+
+        vec3 Normal = prevInfo.Normal;
+
+        vec4 ambient = 0.1f * pl.Color;
+
+        float Diff = max(dot(Normal, r.Direction), 0.0f);
+        vec4 Diffuse = Diff * pl.Color;
+
+        float specularStrength = 0.5;
+
+        vec3 viewDir = normalize(Camera - prevInfo.CorrectedPos.xyz);
+        vec3 reflectDir = reflect(-r.Direction, Normal);
+
+        float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+        vec4 Specular = specularStrength * spec * pl.Color;
+
+        vec4 FinalColor = (Specular + Diffuse + ambient) * prevInfo.Color;
+
+        return vec4(pl.Intensity * (FinalColor.xyz) / (t * t), 1.0f);
+    }
+
+    return vec4(0.05f);
+}
+
+Ray Get_Refracted_Ray(IntersectInfo prevInfo, vec3 Camera, float u)
+{
+    vec3 i = normalize(Camera - prevInfo.CorrectedPos);
+    vec3 n = prevInfo.Normal;
+
+    float ni = dot(i, n);
+
+    vec3 Final_Ray_Dir = (n * sqrt(1 - (u*u * (1 - (ni*ni))))) + u*(i - n*(ni));
+
+    return Ray(prevInfo.CorrectedPos, normalize(-Final_Ray_Dir));
+}
+
+vec4 Get_Refraction_Color(IntersectInfo prevInfo, PointLight pl, vec3 Camera)
+{
+    float u = 2.0f/3.0f; // Refractive Index of Glass with respect to air.
+
+    Ray r = Get_Refracted_Ray(prevInfo, Camera, u);
+
+    IntersectInfo Ray_Info = { vec4(0.0f), vec3(0.0f), vec3(0.0f), 0, 0.0f, false };
+
+    trace(r, Ray_Info);
+
+    if(Ray_Info.id == 4)
+    {
+        r = Get_Refracted_Ray(Ray_Info, Camera, 1.0f/u);
+
+        trace(r, 4, Ray_Info);
+    }
+
+    return Get_Light_Ray_Color(Ray_Info, pl, Camera);
+}
+
+vec4 Get_Color(IntersectInfo prevInfo, PointLight pl, vec2 FragPos, vec3 Camera, bool DoSecond)
+{
+    vec4 TotalColor;
+    float Total = 1.0f;
+
+    if(prevInfo.id == 4) // Refraction
+    {
+        TotalColor += Get_Refraction_Color(prevInfo, pl, Camera);
+    }
+    else
+    {
+        TotalColor += Get_Light_Ray_Color(prevInfo, pl, Camera);
+    }
+
+    if(!false) return TotalColor;
+
+    noise_Seed = prevInfo.t * float(prevInfo.id) * normalize(prevInfo.CorrectedPos);
+
+    vec3 New_Dir = normalize(vec3(
+                                  noise3f(prevInfo.CorrectedPos.xyz),
+                                  noise3f(prevInfo.CorrectedPos.xyz + vec3(1.0f)),
+                                  noise3f(prevInfo.CorrectedPos.xyz + vec3(2.0f)
+                            )));
+
+    Ray new_r = { prevInfo.CorrectedPos, New_Dir };
+
+    IntersectInfo new_i;
+
+    trace(new_r, 3, new_i);
+
+    if(new_i.hasIntersected && false) // Not Execute this part
+    {
+        vec4 Obj_Color = TotalColor * Get_Light_Ray_Color(new_i, pl, Camera);
+
+        TotalColor += vec4(0.25f * Obj_Color.xyz / new_i.t, 1.0f);
+    }
+
+    return TotalColor / Total;
+}
+
+vec4 DEFAULT_COLOR = vec4(0.0f, 0.0f, 0.0f, 0.0f);
+
+void main()
+{
+	// get index in global work group i.e x,y position
+	ivec2 pixel_coords = ivec2(gl_GlobalInvocationID.xy);
+
+	float max_x = 1.0f;
+	float max_y = 1.0f;
+
+	ivec2 dims = imageSize(img_output); // fetch image dimensions
+
+	float x = (float(pixel_coords.x) / dims.x) - 0.5f;
+	float y = (float(pixel_coords.y) / dims.y) - 0.5f;
+
+	vec3 ray_o = CameraPos.xyz;
+	vec3 ray_d = vec3(2.0f * x, 2.0f * y, -1.0f);
+
+	ray_d = ray_d / length(ray_d);
+
+	ray_d = (vec4(ray_d, 0.0f) * ViewTransform).xyz;
+
+	Ray r = { ray_o, ray_d };
+
+    IntersectInfo Info;
+    trace(r, Info);
+
+    vec4 color = vec4(0.0f);
+
+    if(Info.hasIntersected)
+    {
+        color = Get_Color(Info, pl, vec2(pixel_coords.x, pixel_coords.y), CameraPos.xyz, true);
+    }
+
+    imageStore(img_output, ivec2(pixel_coords.x, pixel_coords.y), color);
+}
+

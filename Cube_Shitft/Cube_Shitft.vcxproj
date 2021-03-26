@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RT\Box\Box.cpp" />
+    <ClCompile Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Call.cpp" />
+    <ClCompile Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Camera\Camera.cpp" />
+    <ClCompile Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\CubeMap\CubeMap.cpp" />
+    <ClCompile Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Cuboid\Cuboid.cpp" />
+    <ClCompile Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Functions.cpp" />
+    <ClCompile Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Model\Model.cpp" />
+    <ClCompile Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Shaders\Shader.cpp" />
+    <ClCompile Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Sphere\Sphere.cpp" />
+    <ClCompile Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Square\Square.cpp" />
+    <ClCompile Include="RT\RayTracer\RayTracer.cpp" />
+    <ClCompile Include="OGL\Shaders\SSBO\SSBO.cpp" />
+    <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\RT\RT.hpp" />
+    <ClInclude Include="RT\Box\Box.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Call.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Camera\Camera.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\CubeMap\CubeMap.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Cuboid\Cuboid.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Functions.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\iOGL.hpp" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Model\Model.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\OGL.hpp" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Shaders\Shader.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Sphere\Sphere.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Square\Square.h" />
+    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Wrapper_OGL.h" />
+    <ClInclude Include="RT\RayTracer\RayTracer.h" />
+    <ClInclude Include="OGL\Shaders\SSBO\SSBO.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\ParsedFile.pf" />
+    <None Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\Shaders\Compute_Shaders\Compute.sh" />
+    <None Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\Shaders\Compute_Shaders\Includes\Types.vert" />
+    <None Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\Shaders\Compute_Shaders\Shader.sh" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{6c9b6c11-ff44-43e7-9183-a94ffc3a12b2}</ProjectGuid>
+    <RootNamespace>Cube_Shitft</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <ProjectName>Cube_Shift</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(solutionDir)Dependencies\glm;$(solutionDir)Dependencies\SFML\include;$(solutionDir)Dependencies\SFML\include;$(solutionDir)Dependencies\glew-2.1.0\include;$(solutionDir)Dependencies\GLFW\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(solutionDir)Dependencies\glew-2.1.0\lib\Release\Win32;$(solutionDir)Dependencies\GLFW\lib-vc2017;$(solutionDir)Dependencies\SFML\lib;$(solutionDir)Dependencies\SFML\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib;sfml-system-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;sfml-window-d.lib;sfml-network-d.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(solutionDir)Dependencies\glm;$(solutionDir)Dependencies\SFML\include;$(solutionDir)Dependencies\glew-2.1.0\include;$(solutionDir)Dependencies\GLFW\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(solutionDir)Dependencies\glew-2.1.0\lib\Release\Win32;$(solutionDir)Dependencies\GLFW\lib-vc2017;$(solutionDir)Dependencies\SFML\lib;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib;sfml-system-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;sfml-window-d.lib;sfml-network-d.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
