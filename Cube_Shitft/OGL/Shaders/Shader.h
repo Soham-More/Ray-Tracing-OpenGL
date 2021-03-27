@@ -55,8 +55,8 @@ namespace OGL
 			~Shader();
 
 		public: // Static Variables
-			static unsigned int ShaderCount;
-			static int currentShader;
+			inline static unsigned int ShaderCount = 0;
+			inline static int currentShader = -1;
     };
 }
 

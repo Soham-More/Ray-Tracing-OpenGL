@@ -18,7 +18,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Call.h" />
     <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Functions.h" />
-    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\iOGL.hpp" />
     <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\OGL.hpp" />
     <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Wrapper_OGL.h" />
     <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Camera\Camera.h" />

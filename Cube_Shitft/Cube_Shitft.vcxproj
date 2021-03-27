@@ -41,7 +41,6 @@
     <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\CubeMap\CubeMap.h" />
     <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Cuboid\Cuboid.h" />
     <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Functions.h" />
-    <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\iOGL.hpp" />
     <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Model\Model.h" />
     <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\OGL.hpp" />
     <ClInclude Include="..\..\..\..\..\Soham%27s Directory\Visual C++ Projects\C++ Projects\Cube_Shitft\Cube_Shitft\OGL\Shaders\Shader.h" />
@@ -118,6 +117,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(solutionDir)Dependencies\glm;$(solutionDir)Dependencies\SFML\include;$(solutionDir)Dependencies\SFML\include;$(solutionDir)Dependencies\glew-2.1.0\include;$(solutionDir)Dependencies\GLFW\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(solutionDir)Dependencies\glew-2.1.0\lib\Release\Win32;$(solutionDir)Dependencies\GLFW\lib-vc2017;$(solutionDir)Dependencies\SFML\lib;$(solutionDir)Dependencies\SFML\lib</AdditionalLibraryDirectories>
@@ -142,6 +142,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(solutionDir)Dependencies\glm;$(solutionDir)Dependencies\SFML\include;$(solutionDir)Dependencies\glew-2.1.0\include;$(solutionDir)Dependencies\GLFW\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

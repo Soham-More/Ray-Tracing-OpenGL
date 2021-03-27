@@ -11,8 +11,11 @@
 #include "OGL/OGL.hpp"
 #include "RT/RT.hpp"
 
-unsigned int OGL::Shader::ShaderCount = 0;
-int OGL::Shader::currentShader = -1;
+// Change to false for compiling for a release
+#define DEBUG false
+
+//unsigned int OGL::Shader::ShaderCount = 0;
+//int OGL::Shader::currentShader = -1;
 
 void main()
 {
@@ -25,7 +28,16 @@ void main()
 
 	OGL::Init();
 
-	const std::string Root_Dir = "C:/Users/deathstroke/Desktop/Soham's Directory/Visual C++ Projects/C++ Projects/Cube_Shitft/Cube_Shitft/";
+	std::string Root_Dir;
+
+	if (DEBUG)
+	{
+		Root_Dir = "C:/Users/deathstroke/Desktop/Soham's Directory/Visual C++ Projects/C++ Projects/Cube_Shitft/Cube_Shitft/";
+	}
+	else
+	{
+		Root_Dir = "";
+	}
 
 	OGL::Shader sh(Root_Dir + "Shaders/Compute_Shaders/", "Shader.sh");
 
